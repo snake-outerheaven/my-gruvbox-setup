@@ -1,0 +1,26 @@
+[global]
+    ### Design (Contraste Reforçado) ###
+    # Usando o Marrom Escuro do Gruvbox para a borda
+    frame_width = 2
+    frame_color = "#3c3836" 
+    separator_color = "frame"
+    
+    # ... resto da config ...
+
+[urgency_low]
+    background = "#fbf1c7"
+    foreground = "#928374"
+    frame_color = "#928374" # Borda cinza para alertas baixos
+    timeout = 10
+
+[urgency_normal]
+    background = "#fbf1c7"
+    foreground = "#3c3836"
+    frame_color = "#3c3836" # Borda marrom sólida (contrasta com tudo)
+    timeout = 10
+
+[urgency_critical]
+    background = "#fbf1c7"
+    foreground = "#9d0006"
+    frame_color = "#9d0006" # Vermelho escuro profundo
+    timeout = 0
