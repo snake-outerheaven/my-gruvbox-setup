@@ -70,8 +70,8 @@ set $gray    #928374
 set $bg_alt  #ebdbb2
 
 # --- WINDOW STYLE (SOLID & FLAT) ---
-default_border pixel 1
-default_floating_border pixel 1
+#default_border pixel 6
+#default_floating_border pixel 6
 smart_borders on
 
 #                       border    bg       text     indicator child_border
