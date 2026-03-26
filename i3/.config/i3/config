@@ -80,6 +80,13 @@ client.focused_inactive $bg_alt   $bg      $gray    $bg       $bg_alt
 client.unfocused        $bg_alt   $bg      $gray    $bg       $bg_alt
 client.urgent           $red      $bg      $red     $red      $red
 
+# Mover a janela atual para a 'gaveta' (scratchpad)
+bindsym $mod+Shift+minus move scratchpad
+
+# Mostrar/Esconder a próxima janela do scratchpad
+# Ele alterna entre as janelas que você jogou lá
+bindsym $mod+minus scratchpad show
+
 gaps inner 10
 gaps outer 5
 
