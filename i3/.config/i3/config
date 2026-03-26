@@ -27,35 +27,45 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-fancy --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+#set x server scrensaver time to 300s (5min)
+exec --no-startup-id xset s 300 300
+
+#set monitor to 100hz
 exec_always --no-startup-id xrandr --output HDMI-A-0 --mode 1920x1080 --rate 100.00
 
-
+#start picom
 exec_always --no-startup-id 'picom'
 
+#read feh bg script
 exec --no-startup-id ~/.fehbg
 
+#set notification daemon
 exec --no-startup-id dunst
 
+#set xsettings for a smoother application of GTK themes
 exec --no-startup-id xsettingsd &
 
-exec --no-startup-id xautolock -time 5 -locker 'i3lock-fancy'
+#autolock with i3lock-fancy
+exec --no-startup-id xss-lock -- i3lock-fancy
 
+#lock screen with i3lock-fancy
 bindsym $mod+Shift+x exec i3lock-fancy
 
+#set polkit daemon (dk if its really useful, may be phased out soon)
 exec --no-startup-id lxpolkit
 
-# Print da tela inteira (Full Screen)
-bindsym $mod+p exec --no-startup-id scrot '%Y-%m-%d-%H%M%S_screenshot.png' -e 'mv $f ~/Imagens/prints/'
+#bind maim for fullscreen printscreen
+bindsym $mod+p exec --no-startup-id maim ~/Imagens/prints/$(date +%Y-%m-%d-%H%M%S)_screenshot.png
 
-# Print de uma área selecionada (Selection)
-# O parâmetro -s permite clicar e arrastar o mouse
-bindsym $mod+Shift+p exec --no-startup-id scrot -s '%Y-%m-%d-%H%M%S_area.png' -e 'mv $f ~/Imagens/prints/'
+# bind maim for area printscreen (-s enables area selection)
+bindsym --release $mod+Shift+p exec --no-startup-id maim -s ~/Imagens/prints/$(date +%Y-%m-%d-%H%M%S)_area.png
+
 
 # --- GRUVBOX LIGHT COLORS ---
 set $bg      #fbf1c7
@@ -80,13 +90,13 @@ client.focused_inactive $bg_alt   $bg      $gray    $bg       $bg_alt
 client.unfocused        $bg_alt   $bg      $gray    $bg       $bg_alt
 client.urgent           $red      $bg      $red     $red      $red
 
-# Mover a janela atual para a 'gaveta' (scratchpad)
+# move current window to scratchpad
 bindsym $mod+Shift+minus move scratchpad
 
-# Mostrar/Esconder a próxima janela do scratchpad
-# Ele alterna entre as janelas que você jogou lá
+#show windows on scratchpad (it swaps across scratchpad windows)
 bindsym $mod+minus scratchpad show
 
+#gaps config
 gaps inner 10
 gaps outer 5
 
@@ -253,22 +263,22 @@ bar {
         -t gruvbox-powerline-light
 
     colors {
-        # Fundo da barra em Creme (bg) e texto em Marrom (fg)
+        # bar background on Offwhite (bg) e text in Brown (fg)
         background #fbf1c7
         statusline #3c3836
         separator  #928374
 
         #                  border  bg      text
-        # Workspace focada: Amarelo escuro com fundo bege médio
+        # focused workspace: dark Yellow border with bg medium beige
         focused_workspace  #b57614 #ebdbb2 #3c3836
         
-        # Workspace ativa (em outro monitor):
+        # Active workspace (in other monitor):
         active_workspace   #ebdbb2 #ebdbb2 #3c3836
         
-        # Workspaces inativas: Fundo creme (igual à barra)
+        # Workspaces inativas: offwhite bg (same as bar)
         inactive_workspace #fbf1c7 #fbf1c7 #928374
         
-        # Urgência: Vermelho profundo
+        # Urgency: Deep Red.
         urgent_workspace   #9d0006 #9d0006 #fbf1c7
     }
 }
